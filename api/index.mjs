@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 
 const app = express();
 
+let calls = 0;
+
 app.set("port", 8080);
 
 app.use(bodyParser.json());
@@ -20,10 +22,10 @@ app.get("/api", async (req, res) => {
 });
 
 app.get("/api/data-for-react", async (req, res) => {
-  res.json({ topic: "& Express" });
+  calls++;
+  res.json({ topic: "& Express", calls: calls });
 });
 
 app.listen(app.get("port"), () => {
   console.log(`Node app listening on port ${app.get("port")}`);
 });
-
